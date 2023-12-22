@@ -1,4 +1,4 @@
-import { DexOperationStatus } from '../enum';
+import { DexOperationStatus } from '../enums';
 import { OperationStatus } from './OperationStatus';
 
 export class Statusable {

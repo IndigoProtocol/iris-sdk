@@ -1,14 +1,14 @@
 import { Asset, Token } from '../models/Asset';
 import { LiquidityPoolState } from '../models/LiquidityPoolState';
 import { LiquidityPool } from '../models/LiquidityPool';
-import { LiquidityPoolResponse } from '../types';
+import { LiquidityPoolResponse } from '../api.types';
 
 export class BaseApiService {
 
-    protected _baseUrl: string;
+    protected _baseHost: string;
 
-    constructor(baseUrl: string) {
-        this._baseUrl = baseUrl;
+    constructor(baseHost: string) {
+        this._baseHost = baseHost;
     }
 
     protected responseToLiquidityPool(poolResponse: LiquidityPoolResponse): LiquidityPool {

@@ -1,7 +1,9 @@
 /**
  * Base exports.
  */
-export * from './types';
+export * from './api.types';
+export * from './ws.types';
+export * from './enums';
 
 /**
  * Model exports.
@@ -19,9 +21,12 @@ export * from './models/WithdrawOrder';
  * Service exports.
  */
 export * from './IrisApiService';
+export * from './IrisWebsocketService';
+
 export * from './api/BaseApiService';
 export * from './api/DexService';
 export * from './api/ConnectionService';
 export * from './api/AssetService';
 export * from './api/OrdersService';
 export * from './api/SwapService';
+export * from './api/LiquidityPoolService';

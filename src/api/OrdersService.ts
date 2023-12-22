@@ -9,7 +9,7 @@ import {
     PaginationParams,
     SwapOrderResponse,
     WithdrawOrderResponse
-} from '../types';
+} from '../api.types';
 import { LiquidityPool } from '../models/LiquidityPool';
 import { OperationStatus } from '../models/OperationStatus';
 import { SwapOrder } from '../models/SwapOrder';
@@ -20,7 +20,7 @@ import { DepositOrder } from '../models/DepositOrder';
 export class OrdersService extends BaseApiService {
 
     swaps(paymentKeyCredentials: string[], filters: OrderFilters = {}, pagination: PaginationParams): Promise<PaginatedResponse> {
-        let url: string = `${this._baseUrl}/api/orders/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${filters.type}`;
+        let url: string = `${this._baseHost}/api/orders/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${filters.type}`;
 
         if (filters.asset) {
             url += `&token=${filters.asset.identifier('.')}`;
@@ -69,7 +69,7 @@ export class OrdersService extends BaseApiService {
     }
 
     deposits(paymentKeyCredentials: string[], filters: OrderFilters = {}, pagination: PaginationParams): Promise<PaginatedResponse> {
-        let url: string =`${this._baseUrl}/api/orders/deposits?page=${pagination.page}&limit=${pagination.limit}`;
+        let url: string =`${this._baseHost}/api/orders/deposits?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.asset) {
             url += `&token=${filters.asset.identifier('.')}`;
@@ -116,7 +116,7 @@ export class OrdersService extends BaseApiService {
     }
 
     withdraws(paymentKeyCredentials: string[], filters: OrderFilters = {}, pagination: PaginationParams): Promise<PaginatedResponse> {
-        let url: string =`${this._baseUrl}/api/orders/withdraws?page=${pagination.page}&limit=${pagination.limit}`;
+        let url: string =`${this._baseHost}/api/orders/withdraws?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.poolIdentifier) {
             url += `&poolIdentifier=${filters.poolIdentifier}`;
@@ -156,7 +156,7 @@ export class OrdersService extends BaseApiService {
     }
 
     swapAssets(paymentKeyCredentials: string[]): Promise<Asset[]> {
-        return axios.post(`${this._baseUrl}/api/orders/swaps/assets`, {
+        return axios.post(`${this._baseHost}/api/orders/swaps/assets`, {
             pubKeyHashes: paymentKeyCredentials,
         }).then((response: any) => {
             return response.data.map((asset: AssetResponse) => new Asset(
@@ -174,7 +174,7 @@ export class OrdersService extends BaseApiService {
     }
 
     depositAssets(paymentKeyCredentials: string[]): Promise<Asset[]> {
-        return axios.post(`${this._baseUrl}/api/orders/deposits/assets`, {
+        return axios.post(`${this._baseHost}/api/orders/deposits/assets`, {
             pubKeyHashes: paymentKeyCredentials,
         }).then((response: any) => {
             return response.data.map((asset: AssetResponse) => new Asset(

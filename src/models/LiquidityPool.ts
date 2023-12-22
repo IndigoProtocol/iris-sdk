@@ -9,17 +9,15 @@ export class LiquidityPool {
     public tokenA: Token;
     public tokenB: Asset;
     public createdSlot: number;
-    public lpToken: Asset | undefined;
     public state: LiquidityPoolState | undefined;
 
-    constructor(dex: string, identifier: string, address: string, tokenA: Token, tokenB: Asset, createdSlot: number, lpToken?: Asset, state?: LiquidityPoolState) {
+    constructor(dex: string, identifier: string, address: string, tokenA: Token, tokenB: Asset, createdSlot: number, state?: LiquidityPoolState) {
         this.dex = dex;
         this.identifier = identifier;
         this.address = address;
         this.tokenA = tokenA;
         this.tokenB = tokenB;
         this.createdSlot = createdSlot;
-        this.lpToken = lpToken;
         this.state = state;
     }
 

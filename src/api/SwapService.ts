@@ -1,12 +1,12 @@
 import { BaseApiService } from './BaseApiService';
 import axios from 'axios';
 import { Token } from '../models/Asset';
-import { LimiterResults, OrderRouteResults } from '../types';
+import { LimiterResults, OrderRouteResults } from '../api.types';
 
 export class SwapService extends BaseApiService {
 
     public routeFromReceive(dexs: string[], swapInToken: Token, swapOutToken: Token, swapInAmount: bigint): Promise<OrderRouteResults> {
-        return axios.post(`${this._baseUrl}/api/swap/route/receive`, {
+        return axios.post(`${this._baseHost}/api/swap/route/receive`, {
             dexs,
             swapInAmount: Number(swapInAmount),
             swapInToken: swapInToken === 'lovelace'
@@ -25,7 +25,7 @@ export class SwapService extends BaseApiService {
     }
 
     public routeFromSend(dexs: string[], swapInToken: Token, swapOutToken: Token, swapOutAmount: bigint): Promise<OrderRouteResults> {
-        return axios.post(`${this._baseUrl}/api/swap/route/send`, {
+        return axios.post(`${this._baseHost}/api/swap/route/send`, {
             dexs,
             swapOutAmount: Number(swapOutAmount),
             swapInToken: swapInToken === 'lovelace'
@@ -44,7 +44,7 @@ export class SwapService extends BaseApiService {
     }
 
     public spread(dex: string, swapInToken: Token, swapOutToken: Token, swapInAmount: bigint, stepSize: number, lowestPrice: number): Promise<LimiterResults> {
-        return axios.post(`${this._baseUrl}/api/swap/spread`, {
+        return axios.post(`${this._baseHost}/api/swap/spread`, {
             dex,
             swapInAmount: Number(swapInAmount),
             swapInToken: swapInToken === 'lovelace'

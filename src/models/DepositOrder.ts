@@ -1,7 +1,7 @@
-import { OperationStatus } from '@/models/OperationStatus';
-import { Token } from '@/models/Asset';
-import { Statusable } from '@/models/Statusable';
-import { LiquidityPool } from '@/models/LiquidityPool';
+import { Token } from './Asset';
+import { LiquidityPool } from './LiquidityPool';
+import { OperationStatus } from './OperationStatus';
+import { Statusable } from './Statusable';
 
 export class DepositOrder extends Statusable {
 

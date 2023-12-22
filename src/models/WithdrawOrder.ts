@@ -1,7 +1,7 @@
-import { OperationStatus } from '@/models/OperationStatus';
-import { Asset } from '@/models/Asset';
-import { Statusable } from '@/models/Statusable';
-import { LiquidityPool } from '@/models/LiquidityPool';
+import { LiquidityPool } from './LiquidityPool';
+import { OperationStatus } from './OperationStatus';
+import { Statusable } from './Statusable';
+import { Asset } from './Asset';
 
 export class WithdrawOrder extends Statusable {
 
