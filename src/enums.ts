@@ -18,6 +18,7 @@ export enum SwapOrderType {
 
 export enum WsEvent {
     Sync = 'Sync',
+    Asset = 'Asset',
     LiquidityPool = 'LiquidityPool',
     LiquidityPoolState = 'LiquidityPoolState',
     LiquidityPoolTick = 'LiquidityPoolTick',

@@ -1,13 +1,13 @@
-import { DexOperationStatus, SwapOrderType, TickInterval } from './enums';
+import { DexOperationStatus, SwapOrderType, TickInterval, WsEvent } from './enums';
 
 export type WsSync = {
-    t: 'Sync',
+    t: WsEvent.Sync,
     s: number,  // Slot
     bH: string, // Block hash
 }
 
 export type WsAsset = {
-    t: 'Asset',
+    t: WsEvent.Asset,
     pId: string,    // Policy ID
     nH: string,     // Name Hex
     d: number,      // Decimals
@@ -20,7 +20,7 @@ export type WsAsset = {
 }
 
 export type WsLiquidityPool = {
-    t: 'LiquidityPool',
+    t: WsEvent.LiquidityPool,
     d: string,                // DEX
     i: string,                // Identifier
     a: string,                // Address
@@ -31,7 +31,7 @@ export type WsLiquidityPool = {
 }
 
 export type WsLiquidityPoolState = {
-    t: 'LiquidityPoolState',
+    t: WsEvent.LiquidityPoolState,
     rA: number,          // Reserve A
     rB: number,          // Reserve B
     lpTs: number,        // Total LP tokens
@@ -42,7 +42,7 @@ export type WsLiquidityPoolState = {
 }
 
 export type WsOperationStatus = {
-    t: 'OperationStatus',
+    t: WsEvent.OperationStatus,
     st: DexOperationStatus, // Status type
     s: number,              // Slot
     tH: string,             // Tx hash
@@ -50,7 +50,7 @@ export type WsOperationStatus = {
 }
 
 export type WsLiquidityPoolSwap = {
-    t: 'LiquidityPoolSwap',
+    t: WsEvent.LiquidityPoolSwap,
     siT?: WsAsset,            // Swap in token
     soT?: WsAsset,            // Swap out token
     oT: SwapOrderType,        // Order type
@@ -68,7 +68,7 @@ export type WsLiquidityPoolSwap = {
 }
 
 export type WsLiquidityPoolDesposit = {
-    t: 'LiquidityPoolDeposit',
+    t: WsEvent.LiquidityPoolDeposit,
     dAT?: WsAsset,            // Deposit A token
     dBT?: WsAsset,            // Deposit B token
     dAA: number,              // Deposit A amount
@@ -84,7 +84,7 @@ export type WsLiquidityPoolDesposit = {
 }
 
 export type WsLiquidityPoolWithdraw = {
-    t: 'LiquidityPoolWithdraw',
+    t: WsEvent.LiquidityPoolWithdraw,
     lpT: WsAsset,             // Related LP token
     lpA: number,              // LP token amount
     mA: number,               // Min. receive token A
@@ -100,7 +100,7 @@ export type WsLiquidityPoolWithdraw = {
 }
 
 export type WsLiquidityPoolTick = {
-    t: 'LiquidityPoolTick',
+    t: WsEvent.LiquidityPoolTick,
     r: TickInterval, // Resolution
     o: number,       // Open
     h: number,       // High
