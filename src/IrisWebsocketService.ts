@@ -27,7 +27,13 @@ export class IrisWebsocketService {
         this._client = new WebSocket(this._baseHost);
 
         this._client.onmessage = (event: MessageEvent) => {
-            this._listeners.forEach((listener: Function) => listener(this.formatMessage(event)));
+            this._listeners.forEach((listener: Function) => {
+                try {
+                    listener(this.formatMessage(event))
+                } catch (e) {
+                    // Received updated message type
+                }
+            });
         };
     }
 

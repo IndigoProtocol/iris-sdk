@@ -21,6 +21,7 @@ export class LiquidityPoolResource extends BaseWsResource {
             message.tA ? assetResource.fromWebsocketMessage(message.tA) : 'lovelace',
             assetResource.fromWebsocketMessage(message.tB),
             Number(message.cS),
+            undefined,
             state,
         );
     }

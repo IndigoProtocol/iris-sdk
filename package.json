@@ -1,10 +1,11 @@
 {
-  "name": "iris-sdk",
+  "name": "@indigo-labs/iris-sdk",
   "version": "1.0.0",
   "description": "SDK for interacting with Indigo Iris",
-  "main": "index.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc --project tsconfig.json"
   },
   "author": "Zachary Sluder",
   "license": "ISC",

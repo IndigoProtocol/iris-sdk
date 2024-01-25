@@ -29,6 +29,7 @@ export type OrderFilters = {
 
 export type DexMetadata = {
     name: string,
+    type: string,
     website: string,
     image: string,
     color: string,

@@ -8,15 +8,15 @@ export type WsSync = {
 
 export type WsAsset = {
     t: WsEvent.Asset,
-    pId: string,    // Policy ID
-    nH: string,     // Name Hex
-    d: number,      // Decimals
-    isLp: boolean,  // Is LP token
-    n?: string,     // Name
-    ti?: string     // Ticker
-    l?: string;     // Logo
-    de?: string,    // Description
-    v?: boolean,    // Is verified
+    pId: string,   // Policy ID
+    nH: string,    // Name Hex
+    d: number,     // Decimals
+    isLp: boolean, // Is LP token
+    n?: string,    // Name
+    ti?: string    // Ticker
+    l?: string;    // Logo
+    de?: string,   // Description
+    v?: boolean,   // Is verified
 }
 
 export type WsLiquidityPool = {
