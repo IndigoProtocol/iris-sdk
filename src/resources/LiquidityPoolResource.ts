@@ -1,5 +1,5 @@
 import { BaseWsResource } from './BaseWsResource';
-import { WsLiquidityPool } from '../ws.types';
+import { WsLiquidityPool} from '../ws.types';
 import { LiquidityPool } from '../models/LiquidityPool';
 import { AssetResource } from './AssetResource';
 import { LiquidityPoolStateResource } from './LiquidityPoolStateResource';
@@ -21,6 +21,7 @@ export class LiquidityPoolResource extends BaseWsResource {
             message.tA ? assetResource.fromWebsocketMessage(message.tA) : 'lovelace',
             assetResource.fromWebsocketMessage(message.tB),
             Number(message.cS),
+            undefined,
             state,
         );
     }
