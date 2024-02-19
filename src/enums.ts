@@ -26,4 +26,6 @@ export enum WsEvent {
     LiquidityPoolDeposit = 'LiquidityPoolDeposit',
     LiquidityPoolWithdraw = 'LiquidityPoolWithdraw',
     OperationStatus = 'OperationStatus',
+    OrderBook = 'OrderBook',
+    OrderBookOrder = 'OrderBookOrder',
 }

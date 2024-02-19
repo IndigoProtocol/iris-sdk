@@ -110,6 +110,33 @@ export type WsLiquidityPoolTick = {
     ti: number,      // Time
 }
 
+export type WsOrderBook = {
+    t: WsEvent.OrderBook,
+    d: string,    // DEX
+    i: string,    // Identifier
+    tA?: WsAsset, // Token A
+    tB: WsAsset,  // Token B
+    cS: number,   // Created slot
+}
+
+export type WsOrderBookOrder = {
+    t: WsEvent.OrderBookOrder,
+    i: string,    // Identifier
+    fT?: WsAsset, // From token
+    tT?: WsAsset, // To Token
+    oA: number,   // Original offer amount
+    uA: number,   // Unfilled offer amount
+    aA: number,   // Asked amount
+    p: number,    // Price
+    pF: number,   // # of partial fills
+    fP: number,   // Paid DEX fees
+    pkh: string,  // Public key hash
+    skh: string,  // Stake key hash
+    s: number,    // Placed in slot
+    tH: string,   // Tx hash
+    oI: number,   // Output index
+}
+
 export type WsMessage = WsSync
     | WsAsset
     | WsLiquidityPool
@@ -118,4 +145,6 @@ export type WsMessage = WsSync
     | WsLiquidityPoolDesposit
     | WsLiquidityPoolWithdraw
     | WsOperationStatus
-    | WsLiquidityPoolTick;
+    | WsLiquidityPoolTick
+    | WsOrderBook
+    | WsOrderBookOrder;

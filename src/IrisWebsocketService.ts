@@ -7,6 +7,8 @@ import { LiquidityPoolStateResource } from './resources/LiquidityPoolStateResour
 import { SwapOrderResource } from './resources/SwapOrderResource';
 import { DepositOrderResource } from './resources/DepositOrderResource';
 import { WithdrawOrderResource } from './resources/WithdrawOrderResource';
+import { OrderBookResource } from './resources/OrderBookResource';
+import { OrderBookOrderResource } from './resources/OrderBookOrderResource';
 
 export class IrisWebsocketService {
 
@@ -31,7 +33,7 @@ export class IrisWebsocketService {
                 try {
                     listener(this.formatMessage(event))
                 } catch (e) {
-                    // Received updated message type
+                    // Received unknown message type
                 }
             });
         };
@@ -57,6 +59,10 @@ export class IrisWebsocketService {
                 return (new WithdrawOrderResource()).fromWebsocketMessage(messageData);
             case WsEvent.OperationStatus:
                 return (new OperationStatusResource()).fromWebsocketMessage(messageData);
+            case WsEvent.OrderBook:
+                return (new OrderBookResource()).fromWebsocketMessage(messageData);
+            case WsEvent.OrderBookOrder:
+                return (new OrderBookOrderResource()).fromWebsocketMessage(messageData);
             default:
                 throw new Error('Unable to determine WS message type');
         }

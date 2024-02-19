@@ -19,14 +19,14 @@ import { TickInterval } from '../enums';
 
 export class LiquidityPoolService extends BaseApiService {
 
-    public all(pagination: PaginationParams): Promise<LiquidityPool[]> {
+    public all( pagination: PaginationParams = { page: 1, limit: 100 }): Promise<LiquidityPool[]> {
         return axios.get(`${this._baseHost}/api/liquidity-pools?page=${pagination.page}&limit=${pagination.limit}`)
             .then((response: any) => {
                 return response.data.map((pool: LiquidityPoolResponse) => this.responseToLiquidityPool(pool));
             });
     }
 
-    public match(pool: { identifier?: string, dex?: string, tokenA?: Token, tokenB?: Asset }, pagination: PaginationParams): Promise<PaginatedResponse> {
+    public match(pool: { identifier?: string, dex?: string, tokenA?: Token, tokenB?: Asset },  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
         return axios.post(`${this._baseHost}/api/liquidity-pools?page=${pagination.page}&limit=${pagination.limit}`, {
             identifier: pool.identifier,
             dex: pool.dex,
@@ -40,7 +40,7 @@ export class LiquidityPoolService extends BaseApiService {
         });
     }
 
-    public search(query: string, pagination: PaginationParams): Promise<PaginatedResponse> {
+    public search(query: string,  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
         return axios.get(`${this._baseHost}/api/liquidity-pools/search?query=${query}&page=${pagination.page}&limit=${pagination.limit}`)
             .then((response: any) => {
                 return {
@@ -50,7 +50,7 @@ export class LiquidityPoolService extends BaseApiService {
             });
     }
 
-    public swapOrders(liquidityPool: LiquidityPool, typeFilter: string, senderFilter: string = '', pagination: PaginationParams): Promise<PaginatedResponse> {
+    public swapOrders(liquidityPool: LiquidityPool, typeFilter: string, senderFilter: string = '',  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
         return axios.get(`${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${typeFilter}&sender=${senderFilter}`)
             .then((response: any) => {
                 return {
@@ -91,7 +91,7 @@ export class LiquidityPoolService extends BaseApiService {
         });
     }
 
-    public depositOrders(liquidityPool: LiquidityPool, senderFilter: string = '', pagination: PaginationParams): Promise<PaginatedResponse> {
+    public depositOrders(liquidityPool: LiquidityPool, senderFilter: string = '',  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
         return axios.get(`${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/deposits?page=${pagination.page}&limit=${pagination.limit}&sender=${senderFilter}`)
             .then((response: any) => {
                 return {
@@ -130,7 +130,7 @@ export class LiquidityPoolService extends BaseApiService {
         });
     }
 
-    public withdrawOrders(liquidityPool: LiquidityPool, senderFilter: string = '', pagination: PaginationParams): Promise<PaginatedResponse> {
+    public withdrawOrders(liquidityPool: LiquidityPool, senderFilter: string = '',  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
         return axios.get(`${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/withdraws?page=${pagination.page}&limit=${pagination.limit}&sender=${senderFilter}`)
             .then((response: any) => {
                 return {
@@ -190,7 +190,13 @@ export class LiquidityPoolService extends BaseApiService {
             url += `&toTime=${toTime}`;
         }
 
-        return axios.get(url).then((response: any) => response.data);
+        return axios.get(url).then((response: any) => {
+            return response.data.map((tick: any) => {
+               tick.time *= 1000;
+
+               return tick;
+            });
+        });
     }
 
 }

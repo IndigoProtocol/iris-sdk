@@ -16,6 +16,8 @@ export * from './models/OperationStatus';
 export * from './models/SwapOrder';
 export * from './models/DepositOrder';
 export * from './models/WithdrawOrder';
+export * from './models/OrderBook';
+export * from './models/OrderBookOrder';
 
 /**
  * Service exports.
@@ -30,3 +32,4 @@ export * from './api/AssetService';
 export * from './api/OrdersService';
 export * from './api/SwapService';
 export * from './api/LiquidityPoolService';
+export * from './api/OrderBookService';

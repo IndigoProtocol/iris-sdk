@@ -1,4 +1,5 @@
 import { Asset } from './models/Asset';
+import { LiquidityPool } from './models/LiquidityPool';
 
 export interface PaginationParams {
     page: number,
@@ -12,7 +13,7 @@ export type Pagination = {
 }
 
 export type PaginatedResponse = {
-    data: Asset | Asset[],
+    data: any,
     pagination: Pagination,
 }
 
@@ -99,6 +100,31 @@ export type LiquidityPoolResponse = {
     createdSlot: number,
     lpToken: AssetResponse,
     state: LiquidityPoolStateResponse,
+}
+
+export type OrderBookResponse = {
+    dex: string,
+    identifier: string,
+    tokenA: AssetResponse | null,
+    tokenB: AssetResponse,
+    createdSlot: number,
+}
+
+export type OrderBookOrderResponse = {
+    fromToken: AssetResponse | null,
+    toToken: AssetResponse | null,
+    identifier: string,
+    originalOfferAmount: bigint,
+    unFilledOfferAmount: bigint,
+    askedAmount: bigint,
+    price: number,
+    numPartialFills: number,
+    dexFeesPaid: bigint,
+    senderPubKeyHash: string,
+    senderStakeKeyHash: string | null,
+    slot: number,
+    txHash: string,
+    outputIndex: number,
 }
 
 export type OperationStatusResponse = {

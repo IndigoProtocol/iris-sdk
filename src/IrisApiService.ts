@@ -5,6 +5,7 @@ import { SwapService } from './api/SwapService';
 import { OrdersService } from './api/OrdersService';
 import { LiquidityPoolService } from './api/LiquidityPoolService';
 import { SyncService } from './api/SyncService';
+import { OrderBookService } from './api/OrderBookService';
 
 export class IrisApiService {
 
@@ -40,6 +41,10 @@ export class IrisApiService {
 
     public swap(): SwapService {
         return new SwapService(this._baseHost);
+    }
+
+    public orderBooks(): OrderBookService {
+        return new OrderBookService(this._baseHost);
     }
 
 }
