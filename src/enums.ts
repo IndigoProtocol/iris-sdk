@@ -1,3 +1,5 @@
+import { WsOrderBookTick } from './ws.types';
+
 export enum DexOperationStatus {
     Pending = 0,
     OnChain = 1,
@@ -28,4 +30,5 @@ export enum WsEvent {
     OperationStatus = 'OperationStatus',
     OrderBook = 'OrderBook',
     OrderBookOrder = 'OrderBookOrder',
+    OrderBookTick = 'OrderBookTick',
 }

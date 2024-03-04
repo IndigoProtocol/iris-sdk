@@ -47,6 +47,8 @@ export type WsOperationStatus = {
     s: number,              // Slot
     tH: string,             // Tx hash
     oI: number,             // Output index
+    oTx: string,            // Related operation Tx hash
+    oOi: number,            // Related operation Tx output index
 }
 
 export type WsLiquidityPoolSwap = {
@@ -110,6 +112,17 @@ export type WsLiquidityPoolTick = {
     ti: number,      // Time
 }
 
+export type WsOrderBookTick = {
+    t: WsEvent.OrderBookTick,
+    r: TickInterval, // Resolution
+    o: number,       // Open
+    h: number,       // High
+    l: number,       // Low
+    c: number,       // Close
+    v: number,       // Volume
+    ti: number,      // Time
+}
+
 export type WsOrderBook = {
     t: WsEvent.OrderBook,
     d: string,    // DEX
@@ -129,6 +142,7 @@ export type WsOrderBookOrder = {
     aA: number,   // Asked amount
     p: number,    // Price
     pF: number,   // # of partial fills
+    iC: number,   // Is cancelled
     fP: number,   // Paid DEX fees
     pkh: string,  // Public key hash
     skh: string,  // Stake key hash
@@ -147,4 +161,5 @@ export type WsMessage = WsSync
     | WsOperationStatus
     | WsLiquidityPoolTick
     | WsOrderBook
-    | WsOrderBookOrder;
+    | WsOrderBookOrder
+    | WsOrderBookTick;

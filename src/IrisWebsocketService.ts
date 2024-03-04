@@ -9,6 +9,7 @@ import { DepositOrderResource } from './resources/DepositOrderResource';
 import { WithdrawOrderResource } from './resources/WithdrawOrderResource';
 import { OrderBookResource } from './resources/OrderBookResource';
 import { OrderBookOrderResource } from './resources/OrderBookOrderResource';
+import { OrderBookTickResource } from './resources/OrderBookTickResource';
 
 export class IrisWebsocketService {
 
@@ -34,6 +35,7 @@ export class IrisWebsocketService {
                     listener(this.formatMessage(event))
                 } catch (e) {
                     // Received unknown message type
+                    console.error(e, event);
                 }
             });
         };
@@ -63,6 +65,8 @@ export class IrisWebsocketService {
                 return (new OrderBookResource()).fromWebsocketMessage(messageData);
             case WsEvent.OrderBookOrder:
                 return (new OrderBookOrderResource()).fromWebsocketMessage(messageData);
+            case WsEvent.OrderBookTick:
+                return (new OrderBookTickResource()).fromWebsocketMessage(messageData);
             default:
                 throw new Error('Unable to determine WS message type');
         }

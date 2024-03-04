@@ -15,7 +15,10 @@ export class SwapOrder extends Statusable {
     public dexFeesPaid: bigint;
     public senderPubKeyHash: string;
     public senderStakeKeyHash: string | null;
+    public txHash: string;
+    public outputIndex: number;
     public liquidityPool?: LiquidityPool | null;
+    public statuses: OperationStatus[];
 
     constructor(
         swapInToken: Token,
@@ -28,6 +31,8 @@ export class SwapOrder extends Statusable {
         senderPubKeyHash: string,
         senderStakeKeyHash: string | null,
         statuses: OperationStatus[],
+        txHash: string,
+        outputIndex: number,
         liquidityPool?: LiquidityPool | null,
     ) {
         super(statuses);
@@ -41,6 +46,9 @@ export class SwapOrder extends Statusable {
         this.dexFeesPaid = dexFeesPaid;
         this.senderPubKeyHash = senderPubKeyHash;
         this.senderStakeKeyHash = senderStakeKeyHash;
+        this.txHash = txHash;
+        this.outputIndex = outputIndex;
+        this.statuses = statuses;
         this.liquidityPool = liquidityPool;
     }
 

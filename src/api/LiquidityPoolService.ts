@@ -61,6 +61,8 @@ export class LiquidityPoolService extends BaseApiService {
                                 status.slot,
                                 status.txHash,
                                 status.outputIndex,
+                                status.operationTxHash,
+                                status.operationOutputIndex,
                             );
                         });
 
@@ -83,6 +85,8 @@ export class LiquidityPoolService extends BaseApiService {
                             order.senderPubKeyHash,
                             order.senderStakeKeyHash,
                             operationStatuses,
+                            order.txHash,
+                            Number(order.outputIndex),
                             liquidityPool,
                         );
                     }),
@@ -102,6 +106,8 @@ export class LiquidityPoolService extends BaseApiService {
                                 status.slot,
                                 status.txHash,
                                 status.outputIndex,
+                                status.operationTxHash,
+                                status.operationOutputIndex,
                             );
                         });
 
@@ -141,6 +147,8 @@ export class LiquidityPoolService extends BaseApiService {
                                 status.slot,
                                 status.txHash,
                                 status.outputIndex,
+                                status.operationTxHash,
+                                status.operationOutputIndex,
                             );
                         });
 
@@ -170,7 +178,7 @@ export class LiquidityPoolService extends BaseApiService {
             identifiers: poolIdentifiers,
         }).then((response: any) => response.data.map((entry: any) => {
             return {
-                poolIdentifier: entry.identifier,
+                identifier: entry.identifier,
                 price: entry.price,
                 dayLow: entry.dayLow,
                 dayHigh: entry.dayHigh,

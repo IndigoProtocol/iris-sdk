@@ -11,4 +11,16 @@ export class OrderBook {
     ) {
     }
 
+    get readableTokenAName(): string {
+        return this.tokenA === 'lovelace'
+            ? 'ADA'
+            : this.tokenA.readableName;
+    }
+
+    get readableTokenATicker(): string {
+        return this.tokenA === 'lovelace'
+            ? 'ADA'
+            : (this.tokenA.readableTicker !== '' ? this.tokenA.readableTicker : this.tokenA.readableName);
+    }
+
 }

@@ -11,6 +11,7 @@ export class OrderBookOrder {
         public askedAmount: bigint,
         public price: number,
         public numPartialFills: number,
+        public isCancelled: boolean,
         public dexFeesPaid: bigint,
         public senderPubKeyHash: string,
         public senderStakeKeyHash: string | null,

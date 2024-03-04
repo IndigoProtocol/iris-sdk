@@ -1,5 +1,4 @@
 import { Asset } from './models/Asset';
-import { LiquidityPool } from './models/LiquidityPool';
 
 export interface PaginationParams {
     page: number,
@@ -119,6 +118,7 @@ export type OrderBookOrderResponse = {
     askedAmount: bigint,
     price: number,
     numPartialFills: number,
+    isCancelled: boolean,
     dexFeesPaid: bigint,
     senderPubKeyHash: string,
     senderStakeKeyHash: string | null,
@@ -132,6 +132,8 @@ export type OperationStatusResponse = {
     slot: number,
     txHash: string,
     outputIndex: number,
+    operationTxHash: string,
+    operationOutputIndex: number,
 }
 
 export type SwapOrderResponse = {
@@ -144,6 +146,8 @@ export type SwapOrderResponse = {
     dexFeesPaid: bigint,
     senderPubKeyHash: string,
     senderStakeKeyHash: string | null,
+    txHash: string,
+    outputIndex: number,
     statuses: OperationStatusResponse[],
     liquidityPool: LiquidityPoolResponse,
 }
@@ -173,7 +177,7 @@ export type WithdrawOrderResponse = {
 }
 
 export type PriceInfo = {
-    poolIdentifier: string,
+    identifier: string,
     price: number,
     dayLow: number,
     dayHigh: number,

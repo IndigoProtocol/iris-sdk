@@ -40,6 +40,8 @@ export class OrdersService extends BaseApiService {
                             status.slot,
                             status.txHash,
                             status.outputIndex,
+                            status.operationTxHash,
+                            status.operationOutputIndex,
                         );
                     });
 
@@ -60,6 +62,8 @@ export class OrdersService extends BaseApiService {
                         order.senderPubKeyHash,
                         order.senderStakeKeyHash,
                         operationStatuses,
+                        order.txHash,
+                        Number(order.outputIndex),
                         liquidityPool,
                     );
                 }),
@@ -89,6 +93,8 @@ export class OrdersService extends BaseApiService {
                             status.slot,
                             status.txHash,
                             status.outputIndex,
+                            status.operationTxHash,
+                            status.operationOutputIndex,
                         );
                     });
 
@@ -133,6 +139,8 @@ export class OrdersService extends BaseApiService {
                             status.slot,
                             status.txHash,
                             status.outputIndex,
+                            status.operationTxHash,
+                            status.operationOutputIndex,
                         );
                     });
 

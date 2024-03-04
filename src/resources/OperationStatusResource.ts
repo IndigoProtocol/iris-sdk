@@ -10,6 +10,8 @@ export class OperationStatusResource extends BaseWsResource {
             message.s,
             message.tH,
             message.oI,
+            message.oTx,
+            message.oOi,
         );
     }
 

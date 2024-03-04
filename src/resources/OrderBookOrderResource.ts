@@ -17,6 +17,7 @@ export class OrderBookOrderResource extends BaseWsResource {
             BigInt(message.aA),
             Number(message.p),
             Number(message.pF),
+            Boolean(message.iC),
             BigInt(message.fP),
             message.pkh,
             message.skh,
