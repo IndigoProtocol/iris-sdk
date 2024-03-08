@@ -10,6 +10,7 @@ import { WithdrawOrderResource } from './resources/WithdrawOrderResource';
 import { OrderBookResource } from './resources/OrderBookResource';
 import { OrderBookOrderResource } from './resources/OrderBookOrderResource';
 import { OrderBookTickResource } from './resources/OrderBookTickResource';
+import { OrderBookMatchResource } from './resources/OrderBookMatchResource';
 
 export class IrisWebsocketService {
 
@@ -65,6 +66,8 @@ export class IrisWebsocketService {
                 return (new OrderBookResource()).fromWebsocketMessage(messageData);
             case WsEvent.OrderBookOrder:
                 return (new OrderBookOrderResource()).fromWebsocketMessage(messageData);
+            case WsEvent.OrderBookMatch:
+                return (new OrderBookMatchResource()).fromWebsocketMessage(messageData);
             case WsEvent.OrderBookTick:
                 return (new OrderBookTickResource()).fromWebsocketMessage(messageData);
             default:

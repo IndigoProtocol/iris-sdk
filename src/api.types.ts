@@ -1,4 +1,6 @@
 import { Asset } from './models/Asset';
+import { LiquidityPool } from './models/LiquidityPool';
+import { OrderBook } from './models/OrderBook';
 
 export interface PaginationParams {
     page: number,
@@ -186,6 +188,7 @@ export type PriceInfo = {
 }
 
 export type Tick = {
+    entity?: LiquidityPool | OrderBook | null;
     time: number;
     open: number;
     high: number;

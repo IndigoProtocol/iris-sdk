@@ -103,24 +103,26 @@ export type WsLiquidityPoolWithdraw = {
 
 export type WsLiquidityPoolTick = {
     t: WsEvent.LiquidityPoolTick,
-    r: TickInterval, // Resolution
-    o: number,       // Open
-    h: number,       // High
-    l: number,       // Low
-    c: number,       // Close
-    v: number,       // Volume
-    ti: number,      // Time
+    lP: WsLiquidityPool | null, // Liquidity Pool
+    r: TickInterval,            // Resolution
+    o: number,                  // Open
+    h: number,                  // High
+    l: number,                  // Low
+    c: number,                  // Close
+    v: number,                  // Volume
+    ti: number,                 // Time
 }
 
 export type WsOrderBookTick = {
     t: WsEvent.OrderBookTick,
-    r: TickInterval, // Resolution
-    o: number,       // Open
-    h: number,       // High
-    l: number,       // Low
-    c: number,       // Close
-    v: number,       // Volume
-    ti: number,      // Time
+    oB?: WsOrderBook | null, // Order Book
+    r: TickInterval,         // Resolution
+    o: number,               // Open
+    h: number,               // High
+    l: number,               // Low
+    c: number,               // Close
+    v: number,               // Volume
+    ti: number,              // Time
 }
 
 export type WsOrderBook = {
@@ -151,6 +153,19 @@ export type WsOrderBookOrder = {
     oI: number,   // Output index
 }
 
+export type WsOrderBookMatch = {
+    t: WsEvent.OrderBookMatch,
+    oB?: WsOrderBook | null, // Order Book
+    rO: WsOrderBookOrder,    // Reference order
+    fT?: WsAsset,            // From token
+    mA: number,              // Matched amount
+    pkh: string,             // Public key hash
+    skh: string,             // Stake key hash
+    s: number,               // Placed in slot
+    tH: string,              // Tx hash
+    oI: number,              // Output index
+}
+
 export type WsMessage = WsSync
     | WsAsset
     | WsLiquidityPool
@@ -162,4 +177,5 @@ export type WsMessage = WsSync
     | WsLiquidityPoolTick
     | WsOrderBook
     | WsOrderBookOrder
+    | WsOrderBookMatch
     | WsOrderBookTick;

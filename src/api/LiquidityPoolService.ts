@@ -6,8 +6,10 @@ import {
     LiquidityPoolResponse,
     OperationStatusResponse,
     PaginatedResponse,
-    PaginationParams, PriceInfo,
-    SwapOrderResponse, Tick,
+    PaginationParams,
+    PriceInfo,
+    SwapOrderResponse,
+    Tick,
     WithdrawOrderResponse
 } from '../api.types';
 import { Asset, Token } from '../models/Asset';
