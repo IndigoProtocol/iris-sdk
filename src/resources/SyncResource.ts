@@ -1,14 +1,14 @@
 import { BaseWsResource } from './BaseWsResource';
 import { WsSync } from '../ws.types';
-import { Sync } from '../api.types';
+import { Sync } from '../models/Sync';
 
 export class SyncResource extends BaseWsResource {
 
     fromWebsocketMessage(message: WsSync): Sync {
-        return {
-            slot: Number(message.s),
-            blockHash: message.bH,
-        };
+        return new Sync(
+            Number(message.s),
+            message.bH,
+        );
     }
 
 }

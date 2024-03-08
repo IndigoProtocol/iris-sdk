@@ -3,24 +3,16 @@ import { LiquidityPoolState } from './LiquidityPoolState';
 
 export class LiquidityPool {
 
-    public dex: string;
-    public identifier: string;
-    public address: string;
-    public tokenA: Token;
-    public tokenB: Asset;
-    public createdSlot: number;
-    public lpToken: Asset | undefined;
-    public state: LiquidityPoolState | undefined;
-
-    constructor(dex: string, identifier: string, address: string, tokenA: Token, tokenB: Asset, createdSlot: number, lpToken?: Asset, state?: LiquidityPoolState) {
-        this.dex = dex;
-        this.identifier = identifier;
-        this.address = address;
-        this.tokenA = tokenA;
-        this.tokenB = tokenB;
-        this.createdSlot = createdSlot;
-        this.lpToken = lpToken;
-        this.state = state;
+    constructor(
+        public dex: string,
+        public identifier: string,
+        public address: string,
+        public tokenA: Token,
+        public tokenB: Asset,
+        public createdSlot: number,
+        public lpToken?: Asset,
+        public state?: LiquidityPoolState
+    ) {
     }
 
     get readableTokenAName(): string {

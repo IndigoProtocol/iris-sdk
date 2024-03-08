@@ -18,11 +18,6 @@ export type PaginatedResponse = {
     pagination: Pagination,
 }
 
-export type Sync = {
-    slot: number,
-    blockHash: string,
-}
-
 export type OrderFilters = {
     type?: string,
     asset?: Asset,
