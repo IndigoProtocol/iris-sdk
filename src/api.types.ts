@@ -158,6 +158,8 @@ export type DepositOrderResponse = {
     senderPubKeyHash: string,
     senderStakeKeyHash: string | null,
     statuses: OperationStatusResponse[],
+    txHash: string,
+    outputIndex: number,
     liquidityPool: LiquidityPoolResponse,
 };
 
@@ -170,6 +172,8 @@ export type WithdrawOrderResponse = {
     senderPubKeyHash: string,
     senderStakeKeyHash: string | null,
     statuses: OperationStatusResponse[],
+    txHash: string,
+    outputIndex: number,
     liquidityPool: LiquidityPoolResponse,
 }
 
@@ -181,14 +185,3 @@ export type PriceInfo = {
     dayChange: number,
     hourChange: number,
 }
-
-export type Tick = {
-    entity?: LiquidityPool | OrderBook | null;
-    time: number;
-    open: number;
-    high: number;
-    low: number;
-    close: number;
-    volume: number;
-}
-

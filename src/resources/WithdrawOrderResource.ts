@@ -27,6 +27,8 @@ export class WithdrawOrderResource extends BaseWsResource {
             message.st
                 ? message.st.map((status: WsOperationStatus) => operationStatusResource.fromWebsocketMessage(status))
                 : [],
+            message.tH,
+            Number(message.oI),
             liquidityPool,
         );
     }

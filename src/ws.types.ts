@@ -1,4 +1,5 @@
 import { DexOperationStatus, SwapOrderType, TickInterval, WsEvent } from './enums';
+import { Statusable } from './models/Statusable';
 
 export type WsSync = {
     t: WsEvent.Sync,
@@ -43,6 +44,7 @@ export type WsLiquidityPoolState = {
 
 export type WsOperationStatus = {
     t: WsEvent.OperationStatus,
+    oE: WsLiquidityPoolSwap | WsLiquidityPoolDeposit | WsLiquidityPoolWithdraw | null,
     st: DexOperationStatus, // Status type
     s: number,              // Slot
     tH: string,             // Tx hash
@@ -69,7 +71,7 @@ export type WsLiquidityPoolSwap = {
     st?: WsOperationStatus[], // Order statuses
 }
 
-export type WsLiquidityPoolDesposit = {
+export type WsLiquidityPoolDeposit = {
     t: WsEvent.LiquidityPoolDeposit,
     dAT?: WsAsset,            // Deposit A token
     dBT?: WsAsset,            // Deposit B token
@@ -171,7 +173,7 @@ export type WsMessage = WsSync
     | WsLiquidityPool
     | WsLiquidityPoolState
     | WsLiquidityPoolSwap
-    | WsLiquidityPoolDesposit
+    | WsLiquidityPoolDeposit
     | WsLiquidityPoolWithdraw
     | WsOperationStatus
     | WsLiquidityPoolTick

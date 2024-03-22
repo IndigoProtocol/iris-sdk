@@ -36,6 +36,7 @@ export class OrdersService extends BaseApiService {
                 data: response.data.data.map((order: SwapOrderResponse) => {
                     const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                         return new OperationStatus(
+                            null,
                             status.status,
                             status.slot,
                             status.txHash,
@@ -89,6 +90,7 @@ export class OrdersService extends BaseApiService {
                 data: response.data.data.map((order: DepositOrderResponse) => {
                     const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                         return new OperationStatus(
+                            null,
                             status.status,
                             status.slot,
                             status.txHash,
@@ -113,6 +115,8 @@ export class OrdersService extends BaseApiService {
                         order.senderPubKeyHash,
                         order.senderStakeKeyHash,
                         operationStatuses,
+                        order.txHash,
+                        Number(order.outputIndex),
                         liquidityPool,
                     );
                 }),
@@ -135,6 +139,7 @@ export class OrdersService extends BaseApiService {
                 data: response.data.data.map((order: WithdrawOrderResponse) => {
                     const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                         return new OperationStatus(
+                            null,
                             status.status,
                             status.slot,
                             status.txHash,
@@ -155,6 +160,8 @@ export class OrdersService extends BaseApiService {
                         order.senderPubKeyHash,
                         order.senderStakeKeyHash,
                         operationStatuses,
+                        order.txHash,
+                        Number(order.outputIndex),
                         liquidityPool,
                     );
                 }),

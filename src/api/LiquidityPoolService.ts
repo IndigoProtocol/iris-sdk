@@ -9,7 +9,6 @@ import {
     PaginationParams,
     PriceInfo,
     SwapOrderResponse,
-    Tick,
     WithdrawOrderResponse
 } from '../api.types';
 import { Asset, Token } from '../models/Asset';
@@ -18,6 +17,7 @@ import { OperationStatus } from '../models/OperationStatus';
 import { WithdrawOrder } from '../models/WithdrawOrder';
 import { DepositOrder } from '../models/DepositOrder';
 import { TickInterval } from '../enums';
+import { Tick } from '../models/Tick';
 
 export class LiquidityPoolService extends BaseApiService {
 
@@ -59,6 +59,7 @@ export class LiquidityPoolService extends BaseApiService {
                     data: response.data.data.map((order: SwapOrderResponse) => {
                         const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                             return new OperationStatus(
+                                null,
                                 status.status,
                                 status.slot,
                                 status.txHash,
@@ -104,6 +105,7 @@ export class LiquidityPoolService extends BaseApiService {
                     data: response.data.data.map((order: DepositOrderResponse) => {
                         const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                             return new OperationStatus(
+                                null,
                                 status.status,
                                 status.slot,
                                 status.txHash,
@@ -130,6 +132,8 @@ export class LiquidityPoolService extends BaseApiService {
                             order.senderPubKeyHash,
                             order.senderStakeKeyHash,
                             operationStatuses,
+                            order.txHash,
+                            Number(order.outputIndex),
                             liquidityPool,
                         );
                     }),
@@ -145,6 +149,7 @@ export class LiquidityPoolService extends BaseApiService {
                     data: response.data.data.map((order: WithdrawOrderResponse) => {
                         const operationStatuses: OperationStatus[] = order.statuses.map((status: OperationStatusResponse) => {
                             return new OperationStatus(
+                                null,
                                 status.status,
                                 status.slot,
                                 status.txHash,
@@ -167,6 +172,8 @@ export class LiquidityPoolService extends BaseApiService {
                             order.senderPubKeyHash,
                             order.senderStakeKeyHash,
                             operationStatuses,
+                            order.txHash,
+                            Number(order.outputIndex),
                             liquidityPool,
                         );
                     }),
@@ -176,7 +183,7 @@ export class LiquidityPoolService extends BaseApiService {
     }
 
     public prices(poolIdentifiers: string[]): Promise<PriceInfo[]> {
-        return axios.post(`${this._baseHost}/api/liquidity-pools/analytics/prices`, {
+        return axios.post(`${this._baseHost}/api/liquidity-pools/prices`, {
             identifiers: poolIdentifiers,
         }).then((response: any) => response.data.map((entry: any) => {
             return {
@@ -201,10 +208,17 @@ export class LiquidityPoolService extends BaseApiService {
         }
 
         return axios.get(url).then((response: any) => {
-            return response.data.map((tick: any) => {
-               tick.time *= 1000;
-
-               return tick;
+            return response.data.map((tickInfo: any) => {
+                return new Tick(
+                    tickInfo.liquidityPool ? this.responseToLiquidityPool(tickInfo.liquidityPool) : null,
+                        tickInfo.resolution,
+                        tickInfo.time * 1000,
+                        tickInfo.open,
+                        tickInfo.high,
+                        tickInfo.low,
+                        tickInfo.close,
+                        tickInfo.volume,
+                );
             });
         });
     }

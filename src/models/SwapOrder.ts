@@ -25,16 +25,16 @@ export class SwapOrder extends Statusable {
     }
 
     get price(): number {
-        if (! this.liquidityPool || ! this.actualReceive) return 0;
+        if (! this.liquidityPool) return 0;
 
         // Buy
         if (tokenId(this.swapInToken) === tokenId(this.liquidityPool.tokenA)) {
             return (Number(this.swapInAmount) / 10**tokenDecimals(this.swapInToken ?? 'lovelace'))
-                / (Number(this.actualReceive) / 10**tokenDecimals(this.swapOutToken ?? 'lovelace'));
+                / (Number(this.actualReceive ?? this.minReceive) / 10**tokenDecimals(this.swapOutToken ?? 'lovelace'));
         }
 
         // Sell
-        return (Number(this.actualReceive) / 10**tokenDecimals(this.swapOutToken ?? 'lovelace'))
+        return (Number(this.actualReceive ?? this.minReceive) / 10**tokenDecimals(this.swapOutToken ?? 'lovelace'))
             / (Number(this.swapInAmount) / 10**tokenDecimals(this.swapInToken ?? 'lovelace'));
     }
 

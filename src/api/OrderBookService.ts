@@ -5,13 +5,13 @@ import {
     PaginatedResponse,
     PaginationParams,
     PriceInfo,
-    Tick
 } from '../api.types';
 import axios from 'axios';
 import { Asset, Token } from '../models/Asset';
 import { OrderBook } from '../models/OrderBook';
 import { OrderBookOrder } from '../models/OrderBookOrder';
 import { TickInterval } from '../enums';
+import { Tick } from '../models/Tick';
 
 export class OrderBookService extends BaseApiService {
 
@@ -142,10 +142,29 @@ export class OrderBookService extends BaseApiService {
         }
 
         return axios.get(url).then((response: any) => {
-            return response.data.map((tick: any) => {
-                tick.time *= 1000;
+            return response.data.map((tickInfo: any) => {
+                const orderBook: OrderBook | null = tickInfo.orderBook
+                    ? new OrderBook(
+                        tickInfo.orderBook.dex,
+                        tickInfo.orderBook.identifier,
+                        tickInfo.orderBook.tokenA === null
+                            ? 'lovelace'
+                            : new Asset(tickInfo.orderBook.tokenA.policyId, tickInfo.orderBook.tokenA.nameHex, tickInfo.orderBook.tokenA.decimals, tickInfo.orderBook.tokenA.isVerified, tickInfo.orderBook.tokenA.isLpToken, tickInfo.orderBook.tokenA.name, tickInfo.orderBook.tokenA.ticker, tickInfo.orderBook.tokenA.logo, tickInfo.orderBook.tokenA.description),
+                        new Asset(tickInfo.orderBook.tokenB.policyId, tickInfo.orderBook.tokenB.nameHex, tickInfo.orderBook.tokenB.decimals, tickInfo.orderBook.tokenB.isVerified, tickInfo.orderBook.tokenB.isLpToken, tickInfo.orderBook.tokenB.name, tickInfo.orderBook.tokenB.ticker, tickInfo.orderBook.tokenB.logo, tickInfo.orderBook.tokenB.description),
+                        tickInfo.orderBook.createdSlot,
+                    )
+                : null;
 
-                return tick;
+                return new Tick(
+                    orderBook,
+                    tickInfo.resolution,
+                    tickInfo.time * 1000,
+                    tickInfo.open,
+                    tickInfo.high,
+                    tickInfo.low,
+                    tickInfo.close,
+                    tickInfo.volume,
+                );
             });
         });
     }
