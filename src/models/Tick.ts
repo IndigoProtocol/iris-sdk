@@ -15,4 +15,8 @@ export class Tick {
     ) {
     }
 
+    get percent(): number {
+        return ((this.close - this.open) / this.open) * 100;
+    }
+
 }

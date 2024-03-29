@@ -4,6 +4,7 @@
 export * from './api.types';
 export * from './ws.types';
 export * from './enums';
+export * from './utils';
 
 /**
  * Model exports.

@@ -25,6 +25,7 @@ export type WsLiquidityPool = {
     d: string,                // DEX
     i: string,                // Identifier
     a: string,                // Address
+    oA: string,               // Order Address
     tA?: WsAsset,             // Token A
     tB: WsAsset,              // Token B
     cS: number,               // Created slot

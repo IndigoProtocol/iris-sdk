@@ -91,6 +91,7 @@ export type LiquidityPoolResponse = {
     dex: string,
     identifier: string,
     address: string,
+    orderAddress: string,
     tokenA: AssetResponse | null,
     tokenB: AssetResponse,
     createdSlot: number,

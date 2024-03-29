@@ -33,6 +33,7 @@ export class BaseApiService {
             poolResponse.dex,
             poolResponse.identifier,
             poolResponse.address,
+            poolResponse.orderAddress,
             tokenA,
             tokenB,
             poolResponse.createdSlot,

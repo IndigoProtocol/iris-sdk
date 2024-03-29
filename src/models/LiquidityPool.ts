@@ -7,6 +7,7 @@ export class LiquidityPool {
         public dex: string,
         public identifier: string,
         public address: string,
+        public orderAddress: string,
         public tokenA: Token,
         public tokenB: Asset,
         public createdSlot: number,
