@@ -65,7 +65,9 @@ export class OrdersService extends BaseApiService {
                         operationStatuses,
                         order.txHash,
                         Number(order.outputIndex),
+                        Number(order.slot),
                         liquidityPool,
+                        order.meta,
                     );
                 }),
                 pagination: response.data.pagination,
@@ -117,7 +119,9 @@ export class OrdersService extends BaseApiService {
                         operationStatuses,
                         order.txHash,
                         Number(order.outputIndex),
+                        Number(order.slot),
                         liquidityPool,
+                        order.meta,
                     );
                 }),
                 pagination: response.data.pagination,
@@ -162,7 +166,9 @@ export class OrdersService extends BaseApiService {
                         operationStatuses,
                         order.txHash,
                         Number(order.outputIndex),
+                        Number(order.slot),
                         liquidityPool,
+                        order.meta,
                     );
                 }),
                 pagination: response.data.pagination,

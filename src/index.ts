@@ -34,6 +34,5 @@ export * from './api/DexService';
 export * from './api/ConnectionService';
 export * from './api/AssetService';
 export * from './api/OrdersService';
-export * from './api/SwapService';
 export * from './api/LiquidityPoolService';
 export * from './api/OrderBookService';

@@ -1,5 +1,15 @@
 import { DexOperationStatus, SwapOrderType, TickInterval, WsEvent } from './enums';
-import { Statusable } from './models/Statusable';
+import { Sync } from './models/Sync';
+import { LiquidityPool } from './models/LiquidityPool';
+import { LiquidityPoolState } from './models/LiquidityPoolState';
+import { SwapOrder } from './models/SwapOrder';
+import { DepositOrder } from './models/DepositOrder';
+import { WithdrawOrder } from './models/WithdrawOrder';
+import { OperationStatus } from './models/OperationStatus';
+import { Tick } from './models/Tick';
+import { OrderBook } from './models/OrderBook';
+import { OrderBookOrder } from './models/OrderBookOrder';
+import { OrderBookMatch } from './models/OrderBookMatch';
 
 export type WsSync = {
     t: WsEvent.Sync,
@@ -39,6 +49,7 @@ export type WsLiquidityPoolState = {
     lpTs: number,        // Total LP tokens
     tvl: number,         // Total Value Locked
     f: number,           // Fee percent
+    s: number,           // Slot
     p?: WsLiquidityPool, // Liquidity pool
     tLp?: WsAsset,       // LP token
 }
@@ -70,6 +81,7 @@ export type WsLiquidityPoolSwap = {
     oI: number,               // Output index
     lp?: WsLiquidityPool,     // Liquidity pool
     st?: WsOperationStatus[], // Order statuses
+    m?: string                // Metadata
 }
 
 export type WsLiquidityPoolDeposit = {
@@ -86,6 +98,7 @@ export type WsLiquidityPoolDeposit = {
     oI: number,               // Output index
     lp?: WsLiquidityPool,     // Liquidity pool
     st?: WsOperationStatus[], // Order statuses
+    m?: string                // Metadata
 }
 
 export type WsLiquidityPoolWithdraw = {
@@ -102,6 +115,7 @@ export type WsLiquidityPoolWithdraw = {
     oI: number,               // Output index
     lp?: WsLiquidityPool,     // Liquidity pool
     st?: WsOperationStatus[], // Order statuses
+    m?: string                // Metadata
 }
 
 export type WsLiquidityPoolTick = {
@@ -154,6 +168,7 @@ export type WsOrderBookOrder = {
     s: number,    // Placed in slot
     tH: string,   // Tx hash
     oI: number,   // Output index
+    m?: string    // Metadata
 }
 
 export type WsOrderBookMatch = {
@@ -167,6 +182,7 @@ export type WsOrderBookMatch = {
     s: number,               // Placed in slot
     tH: string,              // Tx hash
     oI: number,              // Output index
+    m?: string               // Metadata
 }
 
 export type WsMessage = WsSync
@@ -182,3 +198,15 @@ export type WsMessage = WsSync
     | WsOrderBookOrder
     | WsOrderBookMatch
     | WsOrderBookTick;
+
+export type WsResponse = Sync
+    | LiquidityPool
+    | LiquidityPoolState
+    | SwapOrder
+    | DepositOrder
+    | WithdrawOrder
+    | OperationStatus
+    | Tick
+    | OrderBook
+    | OrderBookOrder
+    | OrderBookMatch;

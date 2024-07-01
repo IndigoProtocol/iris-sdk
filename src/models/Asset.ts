@@ -12,6 +12,7 @@ export class Asset {
         public ticker: string | null = null,
         public logo: string | null = null,
         public description: string | null = null,
+        public meta?: any,
     ) {
     }
 
@@ -25,6 +26,16 @@ export class Asset {
 
     public identifier(dilimeter: '' | '.' = ''): string {
         return `${this.policyId}${dilimeter}${this.nameHex}`;
+    }
+
+    static fromIdentifier(id: string, decimals: number = 0): Asset {
+        id = id.replace('.', '');
+
+        return new Asset(
+            id.slice(0, 56),
+            id.slice(56),
+            decimals,
+        );
     }
 
 }

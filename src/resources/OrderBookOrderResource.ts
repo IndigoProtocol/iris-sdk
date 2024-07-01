@@ -24,6 +24,7 @@ export class OrderBookOrderResource extends BaseWsResource {
             Number(message.s),
             message.tH,
             Number(message.oI),
+            message.m,
         );
     }
 

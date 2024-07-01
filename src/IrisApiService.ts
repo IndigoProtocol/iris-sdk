@@ -1,7 +1,6 @@
 import { AssetService } from './api/AssetService';
 import { DexService } from './api/DexService';
 import { ConnectionService } from './api/ConnectionService';
-import { SwapService } from './api/SwapService';
 import { OrdersService } from './api/OrdersService';
 import { LiquidityPoolService } from './api/LiquidityPoolService';
 import { SyncService } from './api/SyncService';
@@ -37,10 +36,6 @@ export class IrisApiService {
 
     public orders(): OrdersService {
         return new OrdersService(this._baseHost);
-    }
-
-    public swap(): SwapService {
-        return new SwapService(this._baseHost);
     }
 
     public orderBooks(): OrderBookService {

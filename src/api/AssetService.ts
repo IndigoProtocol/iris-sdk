@@ -24,6 +24,7 @@ export class AssetService extends BaseApiService {
                         asset.ticker,
                         asset.logo,
                         asset.description,
+                        asset.meta,
                     )),
                     pagination: response.data.pagination,
                 };
@@ -53,6 +54,7 @@ export class AssetService extends BaseApiService {
                     asset.ticker,
                     asset.logo,
                     asset.description,
+                    asset.meta,
                 )),
                 pagination: response.data.pagination,
             };
@@ -60,7 +62,7 @@ export class AssetService extends BaseApiService {
     }
 
     public search(query: string,  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
-        return axios.get(`${this._baseHost}/api/assets/search?query=${query}&${pagination.page}&limit=${pagination.limit}`).then((response: any) => {
+        return axios.get(`${this._baseHost}/api/assets/search?query=${query}&page=${pagination.page}&limit=${pagination.limit}`).then((response: any) => {
             if (response.data.message) {
                 return Promise.reject(response.data.message);
             }
@@ -76,6 +78,7 @@ export class AssetService extends BaseApiService {
                     asset.ticker,
                     asset.logo,
                     asset.description,
+                    asset.meta,
                 )),
                 pagination: response.data.pagination,
             };
@@ -98,6 +101,7 @@ export class AssetService extends BaseApiService {
                 response.data.ticker,
                 response.data.logo,
                 response.data.description,
+                response.data.meta,
             );
         });
     }

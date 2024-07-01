@@ -9,6 +9,7 @@ export class LiquidityPoolState {
         public lpTokens: bigint,
         public feePercent: number,
         public tvl: bigint,
+        public slot: number,
         public pool?: LiquidityPool,
         public lpToken?: Asset
     ) {

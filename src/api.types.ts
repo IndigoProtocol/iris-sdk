@@ -1,6 +1,4 @@
 import { Asset } from './models/Asset';
-import { LiquidityPool } from './models/LiquidityPool';
-import { OrderBook } from './models/OrderBook';
 
 export interface PaginationParams {
     page: number,
@@ -32,41 +30,6 @@ export type DexMetadata = {
     color: string,
 }
 
-export type OrderRouteBreakdown = {
-    swapInAmount: number,
-    splitPercentage: number,
-    poolFeePercent: number,
-    estimatedReceive: number,
-    priceImpactPercent: number,
-    dexFees: number,
-    liquidityPool: LiquidityPoolResponse,
-}
-
-export type OrderRouteResult = {
-    [dex: string]: OrderRouteBreakdown,
-}
-
-export type OrderRouteResults = {
-    totalSwapInAmount: number,
-    totalEstimatedReceive: number,
-    results: OrderRouteResult,
-}
-
-export type LimiterResult = {
-    swapInAmount: number,
-    estimatedReceive: number,
-    percentAllocated: number,
-    dexFees: number,
-    price: number,
-}
-
-export type LimiterResults = {
-    totalSwapInAmount: number,
-    totalEstimatedReceive: number,
-    liquidityPool: LiquidityPoolResponse,
-    results: LimiterResult[],
-}
-
 export type AssetResponse = {
     policyId: string,
     nameHex: string,
@@ -77,6 +40,7 @@ export type AssetResponse = {
     ticker: string,
     logo: string,
     description: string,
+    meta?: string,
 }
 
 export type LiquidityPoolStateResponse = {
@@ -85,6 +49,8 @@ export type LiquidityPoolStateResponse = {
     lpTokens: bigint,
     tvl: bigint,
     feePercent: number,
+    slot: number,
+    liquidityPool?: LiquidityPoolResponse,
 }
 
 export type LiquidityPoolResponse = {
@@ -123,6 +89,7 @@ export type OrderBookOrderResponse = {
     slot: number,
     txHash: string,
     outputIndex: number,
+    meta?: string,
 }
 
 export type OperationStatusResponse = {
@@ -146,8 +113,10 @@ export type SwapOrderResponse = {
     senderStakeKeyHash: string | null,
     txHash: string,
     outputIndex: number,
+    slot: number,
     statuses: OperationStatusResponse[],
     liquidityPool: LiquidityPoolResponse,
+    meta?: string,
 }
 
 export type DepositOrderResponse = {
@@ -161,7 +130,9 @@ export type DepositOrderResponse = {
     statuses: OperationStatusResponse[],
     txHash: string,
     outputIndex: number,
+    slot: number,
     liquidityPool: LiquidityPoolResponse,
+    meta?: string,
 };
 
 export type WithdrawOrderResponse = {
@@ -175,7 +146,9 @@ export type WithdrawOrderResponse = {
     statuses: OperationStatusResponse[],
     txHash: string,
     outputIndex: number,
+    slot: number,
     liquidityPool: LiquidityPoolResponse,
+    meta?: string,
 }
 
 export type PriceInfo = {

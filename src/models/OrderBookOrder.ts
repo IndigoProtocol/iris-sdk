@@ -18,6 +18,7 @@ export class OrderBookOrder {
         public slot: number,
         public txHash: string,
         public outputIndex: number,
+        public meta?: any,
     ) {
     }
 

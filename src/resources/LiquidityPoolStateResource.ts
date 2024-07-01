@@ -23,6 +23,7 @@ export class LiquidityPoolStateResource extends BaseWsResource {
             BigInt(message.lpTs),
             Number(message.f),
             BigInt(message.tvl),
+            Number(message.s),
             liquidityPool,
             lpToken,
         );

@@ -16,7 +16,9 @@ export class DepositOrder extends Statusable {
         public statuses: OperationStatus[],
         public txHash: string,
         public outputIndex: number,
+        public slot: number,
         public liquidityPool?: LiquidityPool | null,
+        public meta?: any,
     ) {
         super(statuses);
     }

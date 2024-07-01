@@ -33,7 +33,7 @@ export class IrisWebsocketService {
         this._client.onmessage = (event: MessageEvent) => {
             this._listeners.forEach((listener: Function) => {
                 try {
-                    listener(this.formatMessage(event))
+                    listener(this.formatMessage(event));
                 } catch (e) {
                     // Received unknown message type
                     console.error(e, event);

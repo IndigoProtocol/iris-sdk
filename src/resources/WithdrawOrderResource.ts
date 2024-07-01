@@ -29,7 +29,9 @@ export class WithdrawOrderResource extends BaseWsResource {
                 : [],
             message.tH,
             Number(message.oI),
+            Number(message.s),
             liquidityPool,
+            message.m,
         );
     }
 
