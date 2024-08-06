@@ -3,6 +3,8 @@ import { AssetResponse, PaginatedResponse, PaginationParams } from '../api.types
 import axios from 'axios';
 import { Asset } from '../models/Asset';
 import { LiquidityPool } from '../models/LiquidityPool';
+import { TickInterval } from '../enums';
+import { Tick } from '../models/Tick';
 
 export class AssetService extends BaseApiService {
 
@@ -123,6 +125,34 @@ export class AssetService extends BaseApiService {
             }
 
             return this.responseToLiquidityPool(response.data);
+        });
+    }
+
+    public ticks(forAssets: Asset[], resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number): Promise<Tick[]> {
+        let url: string = `${this._baseHost}/api/assets/ticks?resolution=${resolution}&orderBy=${orderBy}`;
+
+        if (fromTime) {
+            url += `&fromTime=${fromTime}`;
+        }
+        if (toTime) {
+            url += `&toTime=${toTime}`;
+        }
+
+        return axios.post(url, {
+            forAssets: forAssets.map((asset: Asset) => asset.identifier())
+        }).then((response: any) => {
+            return response.data.map((tickInfo: any) => {
+                return new Tick(
+                    tickInfo.liquidityPool ? this.responseToLiquidityPool(tickInfo.liquidityPool) : null,
+                    tickInfo.resolution,
+                    tickInfo.time * 1000,
+                    tickInfo.open,
+                    tickInfo.high,
+                    tickInfo.low,
+                    tickInfo.close,
+                    tickInfo.volume,
+                );
+            });
         });
     }
 
