@@ -11,8 +11,8 @@ export type Pagination = {
     totalPages: number,
 }
 
-export type PaginatedResponse = {
-    data: any,
+export type PaginatedResponse<T> = {
+    data: T[],
     pagination: Pagination,
 }
 
