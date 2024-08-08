@@ -19,7 +19,7 @@ import { DepositOrder } from '../models/DepositOrder';
 
 export class OrdersService extends BaseApiService {
 
-    swaps(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    swaps(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<SwapOrder>> {
         let url: string = `${this._baseHost}/api/orders/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${filters.type}`;
 
         if (filters.asset) {
@@ -75,7 +75,7 @@ export class OrdersService extends BaseApiService {
         });
     }
 
-    deposits(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    deposits(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<DepositOrder>> {
         let url: string =`${this._baseHost}/api/orders/deposits?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.asset) {
@@ -129,7 +129,7 @@ export class OrdersService extends BaseApiService {
         });
     }
 
-    withdraws(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    withdraws(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<WithdrawOrder>> {
         let url: string =`${this._baseHost}/api/orders/withdraws?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.poolIdentifier) {
