@@ -40,6 +40,7 @@ export class IrisWebsocketService {
                 }
             });
         };
+        this._client.onclose = () => this.connect();
     }
 
     private formatMessage(message: MessageEvent) {
