@@ -8,7 +8,7 @@ import { Tick } from '../models/Tick';
 
 export class AssetService extends BaseApiService {
 
-    public all( pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    public all( pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<Asset>> {
         return axios.get(`${this._baseHost}/api/assets?page=${pagination.page}&limit=${pagination.limit}`)
             .then((response: any) => {
                 if (response.data.message) {
@@ -33,7 +33,7 @@ export class AssetService extends BaseApiService {
             });
     }
 
-    public match(asset: { policyId?: string, nameHex?: string },  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    public match(asset: { policyId?: string, nameHex?: string },  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<Asset>> {
         return axios.post(`${this._baseHost}/api/assets?page=${pagination.page}&limit=${pagination.limit}`, {
             policyId: asset.policyId,
             nameHex: asset.nameHex,
@@ -63,7 +63,7 @@ export class AssetService extends BaseApiService {
         });
     }
 
-    public search(query: string,  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    public search(query: string,  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<Asset>> {
         return axios.get(`${this._baseHost}/api/assets/search?query=${query}&page=${pagination.page}&limit=${pagination.limit}`).then((response: any) => {
             if (response.data.message) {
                 return Promise.reject(response.data.message);

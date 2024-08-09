@@ -32,7 +32,7 @@ export class OrderBookService extends BaseApiService {
             });
     }
 
-    public match(book: { identifier?: string, dex?: string, tokenA?: Token, tokenB?: Asset },  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse> {
+    public match(book: { identifier?: string, dex?: string, tokenA?: Token, tokenB?: Asset },  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<OrderBook>> {
         return axios.post(`${this._baseHost}/api/order-books?page=${pagination.page}&limit=${pagination.limit}`, {
             identifier: book.identifier,
             dex: book.dex,
