@@ -19,8 +19,8 @@ export class WithdrawOrderResource extends BaseWsResource {
         return new WithdrawOrder(
             assetResource.fromWebsocketMessage(message.lpT),
             BigInt(message.lpA),
-            BigInt(message.mA),
-            BigInt(message.mB),
+            BigInt(message.mA ?? 0),
+            BigInt(message.mB ?? 0),
             BigInt(message.fP),
             message.pkh,
             message.skh,

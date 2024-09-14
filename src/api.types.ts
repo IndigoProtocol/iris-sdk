@@ -51,6 +51,7 @@ export type LiquidityPoolStateResponse = {
     feePercent: number,
     slot: number,
     liquidityPool?: LiquidityPoolResponse,
+    tokenLp: AssetResponse,
 }
 
 export type LiquidityPoolResponse = {
@@ -61,7 +62,6 @@ export type LiquidityPoolResponse = {
     tokenA: AssetResponse | null,
     tokenB: AssetResponse,
     createdSlot: number,
-    lpToken: AssetResponse,
     state: LiquidityPoolStateResponse,
 }
 
