@@ -19,7 +19,7 @@ import { DepositOrder } from '../models/DepositOrder';
 
 export class OrdersService extends BaseApiService {
 
-    swaps(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<SwapOrder>> {
+    swaps(paymentKeyCredentials: string[], stakeKeyCredentials: string[] = [], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<SwapOrder>> {
         let url: string = `${this._baseHost}/api/orders/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${filters.type}`;
 
         if (filters.asset) {
@@ -31,6 +31,7 @@ export class OrdersService extends BaseApiService {
 
         return axios.post(url, {
             pubKeyHashes: paymentKeyCredentials,
+            stakeKeyHashes: stakeKeyCredentials,
         }).then((response: any) => {
             return {
                 data: response.data.data.map((order: SwapOrderResponse) => {
@@ -75,7 +76,7 @@ export class OrdersService extends BaseApiService {
         });
     }
 
-    deposits(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<DepositOrder>> {
+    deposits(paymentKeyCredentials: string[], stakeKeyCredentials: string[] = [], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<DepositOrder>> {
         let url: string =`${this._baseHost}/api/orders/deposits?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.asset) {
@@ -87,6 +88,7 @@ export class OrdersService extends BaseApiService {
 
         return axios.post(url, {
             pubKeyHashes: paymentKeyCredentials,
+            stakeKeyHashes: stakeKeyCredentials,
         }).then((response: any) => {
             return {
                 data: response.data.data.map((order: DepositOrderResponse) => {
@@ -129,7 +131,7 @@ export class OrdersService extends BaseApiService {
         });
     }
 
-    withdraws(paymentKeyCredentials: string[], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<WithdrawOrder>> {
+    withdraws(paymentKeyCredentials: string[], stakeKeyCredentials: string[] = [], filters: OrderFilters = {},  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<WithdrawOrder>> {
         let url: string =`${this._baseHost}/api/orders/withdraws?page=${pagination.page}&limit=${pagination.limit}`;
 
         if (filters.poolIdentifier) {
@@ -138,6 +140,7 @@ export class OrdersService extends BaseApiService {
 
         return axios.post(url, {
             pubKeyHashes: paymentKeyCredentials,
+            stakeKeyHashes: stakeKeyCredentials,
         }).then((response: any) => {
             return {
                 data: response.data.data.map((order: WithdrawOrderResponse) => {

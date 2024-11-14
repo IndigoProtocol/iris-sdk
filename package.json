@@ -1,14 +1,19 @@
 {
   "name": "@indigo-labs/iris-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "SDK for interacting with Indigo Iris",
+  "author": "Zachary Sluder",
+  "keywords": [
+    "iris",
+    "Cardano",
+    "DEX"
+  ],
+  "license": "MIT",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "scripts": {
     "build": "tsc --project tsconfig.json"
   },
-  "author": "Zachary Sluder",
-  "license": "ISC",
   "devDependencies": {
     "typescript": "^5.3.3"
   },
