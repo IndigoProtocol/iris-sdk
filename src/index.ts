@@ -36,3 +36,18 @@ export * from './api/AssetService';
 export * from './api/OrdersService';
 export * from './api/LiquidityPoolService';
 export * from './api/OrderBookService';
+
+export * from './resources/BaseWsResource';
+export * from './resources/AssetResource';
+export * from './resources/DepositOrderResource';
+export * from './resources/LiquidityPoolResource';
+export * from './resources/LiquidityPoolStateResource';
+export * from './resources/LiquidityPoolTickResource';
+export * from './resources/OperationStatusResource';
+export * from './resources/OrderBookMatchResource';
+export * from './resources/OrderBookOrderResource';
+export * from './resources/OrderBookResource';
+export * from './resources/OrderBookTickResource';
+export * from './resources/SwapOrderResource';
+export * from './resources/SyncResource';
+export * from './resources/WithdrawOrderResource';
