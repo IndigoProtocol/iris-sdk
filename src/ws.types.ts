@@ -40,6 +40,7 @@ export type WsLiquidityPool = {
     tB: WsAsset,              // Token B
     cS: number,               // Created slot
     s?: WsLiquidityPoolState, // Latest state
+    m?: string,               // Metadata
 }
 
 export type WsLiquidityPoolState = {

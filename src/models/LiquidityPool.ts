@@ -12,7 +12,8 @@ export class LiquidityPool {
         public tokenB: Asset,
         public createdSlot: number,
         public lpToken?: Asset,
-        public state?: LiquidityPoolState
+        public state?: LiquidityPoolState,
+        public meta?: any,
     ) {
     }
 

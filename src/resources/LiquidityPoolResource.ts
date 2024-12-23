@@ -24,6 +24,7 @@ export class LiquidityPoolResource extends BaseWsResource {
             Number(message.cS),
             undefined,
             state,
+            message.m,
         );
     }
 

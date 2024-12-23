@@ -40,6 +40,7 @@ export class BaseApiService {
             poolResponse.createdSlot,
             lpToken,
             state,
+            poolResponse.meta
         );
     }
 

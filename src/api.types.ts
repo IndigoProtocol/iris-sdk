@@ -63,6 +63,7 @@ export type LiquidityPoolResponse = {
     tokenB: AssetResponse,
     createdSlot: number,
     state: LiquidityPoolStateResponse,
+    meta?: string,
 }
 
 export type OrderBookResponse = {
