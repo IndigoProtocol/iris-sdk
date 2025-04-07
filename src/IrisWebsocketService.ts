@@ -27,6 +27,10 @@ export class IrisWebsocketService {
         this._listeners.push(callback);
     }
 
+    public removeListener(callback: Function): void {
+        this._listeners = this._listeners.filter((listener: Function) => listener !== callback);
+    }
+
     public connect(): void {
         this._client = new WebSocket(this._baseHost);
 

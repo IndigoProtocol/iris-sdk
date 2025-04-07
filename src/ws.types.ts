@@ -49,7 +49,8 @@ export type WsLiquidityPoolState = {
     rB: number,          // Reserve B
     lpTs: number,        // Total LP tokens
     tvl: number,         // Total Value Locked
-    f: number,           // Fee percent
+    bF: number,          // Buy Fee percent
+    sF: number,          // Sell Fee percent
     s: number,           // Slot
     p?: WsLiquidityPool, // Liquidity pool
     tLp?: WsAsset,       // LP token

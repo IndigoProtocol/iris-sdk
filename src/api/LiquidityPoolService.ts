@@ -64,7 +64,7 @@ export class LiquidityPoolService extends BaseApiService {
             });
     }
 
-    public swapOrders(liquidityPool: LiquidityPool, typeFilter: string, senderFilter: string = '',  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<SwapOrder>> {
+    public swapOrders(liquidityPool: LiquidityPool, typeFilter: string = 'all', senderFilter: string = '',  pagination: PaginationParams = { page: 1, limit: 100 }): Promise<PaginatedResponse<SwapOrder>> {
         return axios.get(`${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/swaps?page=${pagination.page}&limit=${pagination.limit}&type=${typeFilter}&sender=${senderFilter}`)
             .then((response: any) => {
                 return {
@@ -351,7 +351,8 @@ export class LiquidityPoolService extends BaseApiService {
                     BigInt(state.reserveA),
                     BigInt(state.reserveB),
                     BigInt(state.lpTokens),
-                    Number(state.feePercent),
+                    Number(state.buyFeePercent),
+                    Number(state.sellFeePercent),
                     BigInt(state.tvl),
                     Number(state.slot),
                     liquidityPool,

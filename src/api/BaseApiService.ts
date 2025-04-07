@@ -16,16 +16,18 @@ export class BaseApiService {
             ? new Asset(poolResponse.tokenA.policyId, poolResponse.tokenA.nameHex, poolResponse.tokenA.decimals, poolResponse.tokenA.isVerified, poolResponse.tokenA.isLpToken, poolResponse.tokenA.name, poolResponse.tokenA.ticker, poolResponse.tokenA.logo, poolResponse.tokenA.description, poolResponse.tokenA.meta)
             : 'lovelace';
         const tokenB: Asset = new Asset(poolResponse.tokenB.policyId, poolResponse.tokenB.nameHex, poolResponse.tokenB.decimals, poolResponse.tokenB.isVerified, poolResponse.tokenB.isLpToken, poolResponse.tokenB.name, poolResponse.tokenB.ticker, poolResponse.tokenB.logo, poolResponse.tokenB.description, poolResponse.tokenB.meta);
+
         const lpToken: Asset | undefined = poolResponse.state?.tokenLp
             ? new Asset(poolResponse.state.tokenLp.policyId, poolResponse.state.tokenLp.nameHex, poolResponse.state.tokenLp.decimals)
             : undefined;
         const state: LiquidityPoolState | undefined = poolResponse.state
             ? new LiquidityPoolState(
-                poolResponse.state.reserveA,
-                poolResponse.state.reserveB,
+                BigInt(poolResponse.state.reserveA),
+                BigInt(poolResponse.state.reserveB),
                 poolResponse.state.lpTokens,
-                poolResponse.state.feePercent,
-                poolResponse.state.tvl ?? 0n,
+                poolResponse.state.buyFeePercent,
+                poolResponse.state.sellFeePercent,
+                BigInt(poolResponse.state.tvl ?? 0n),
                 poolResponse.state.slot,
             )
             : undefined;
