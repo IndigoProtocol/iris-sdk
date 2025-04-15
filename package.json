@@ -1,6 +1,6 @@
 {
   "name": "@indigo-labs/iris-sdk",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "SDK for interacting with Indigo Iris",
   "author": "Zachary Sluder",
   "keywords": [
