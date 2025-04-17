@@ -44,7 +44,14 @@ export class IrisWebsocketService {
                 }
             });
         };
-        this._client.onclose = () => this.connect();
+
+        const reconnect = () => setTimeout(() => {
+            this._client = undefined;
+            this.connect();
+        }, 5_000);
+
+        this._client.onclose = () => reconnect();
+        this._client.onerror = () => this._client?.close();
     }
 
     private formatMessage(message: MessageEvent) {
