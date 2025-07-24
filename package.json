@@ -9,12 +9,13 @@
     "DEX"
   ],
   "license": "MIT",
-  "main": "./build/index.js",
-  "types": "./build/index.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc --project tsconfig.json"
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.json"
   },
   "devDependencies": {
+    "tsup": "^8.5.0",
     "typescript": "^5.3.3"
   },
   "files": [
