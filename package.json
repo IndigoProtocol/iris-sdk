@@ -9,11 +9,10 @@
     "DEX"
   ],
   "license": "MIT",
-  "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --clean --tsconfig tsconfig.json"
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.json"
   },
   "devDependencies": {
     "tsup": "^8.5.0",
