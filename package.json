@@ -3,24 +3,18 @@
   "version": "1.0.5",
   "description": "SDK for interacting with Indigo Iris",
   "author": "Zachary Sluder",
-  "keywords": [
-    "iris",
-    "Cardano",
-    "DEX"
-  ],
+  "keywords": ["iris", "Cardano", "DEX"],
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts --clean --tsconfig tsconfig.json"
+    "build": "tsup src/index.ts --dts --format cjs --out-dir dist --clean --tsconfig tsconfig.json"
   },
+  "files": ["dist/**/*"],
   "devDependencies": {
     "tsup": "^8.5.0",
     "typescript": "^5.3.3"
   },
-  "files": [
-    "dist/**/*"
-  ],
   "dependencies": {
     "axios": "^1.6.2"
   }
