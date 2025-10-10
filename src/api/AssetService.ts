@@ -108,8 +108,14 @@ export class AssetService extends BaseApiService {
         });
     }
 
-    public price(asset: { policyId: string, nameHex: string }): Promise<number> {
-        return axios.get(`${this._baseHost}/api/assets/${asset.policyId}.${asset.nameHex}/price`).then((response: any) => {
+    public price(asset: { policyId: string, nameHex: string }, baseTokenIdentifier?: string): Promise<number> {
+        let url: string = `${this._baseHost}/api/assets/${asset.policyId}.${asset.nameHex}/price`;
+
+        if (baseTokenIdentifier) {
+            url += `?baseTokenIdentifier=${baseTokenIdentifier}`;
+        }
+
+        return axios.get(url).then((response: any) => {
             if ('success' in response.data && ! response.data.success) {
                 return 0;
             }
@@ -128,7 +134,7 @@ export class AssetService extends BaseApiService {
         });
     }
 
-    public ticks(forAssets: Asset[], resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number): Promise<Tick[]> {
+    public ticks(forAssets: Asset[], resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number, baseTokenIdentifier?: string): Promise<Tick[]> {
         let url: string = `${this._baseHost}/api/assets/ticks?resolution=${resolution}&orderBy=${orderBy}`;
 
         if (fromTime) {
@@ -136,6 +142,9 @@ export class AssetService extends BaseApiService {
         }
         if (toTime) {
             url += `&toTime=${toTime}`;
+        }
+        if (baseTokenIdentifier) {
+            url += `&baseTokenIdentifier=${baseTokenIdentifier}`;
         }
 
         return axios.post(url, {

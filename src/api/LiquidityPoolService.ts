@@ -361,8 +361,14 @@ export class LiquidityPoolService extends BaseApiService {
         });
     }
 
-    public prices(poolIdentifiers: string[]): Promise<PriceInfo[]> {
-        return axios.post(`${this._baseHost}/api/liquidity-pools/prices`, {
+    public prices(poolIdentifiers: string[], baseTokenIdentifier?: string): Promise<PriceInfo[]> {
+        let url: string = `${this._baseHost}/api/liquidity-pools/prices`;
+
+        if (baseTokenIdentifier) {
+            url += `?baseTokenIdentifier=${baseTokenIdentifier}`;
+        }
+
+        return axios.post(url, {
             identifiers: poolIdentifiers,
         }).then((response: any) => response.data.map((entry: any) => {
             return {
@@ -376,7 +382,7 @@ export class LiquidityPoolService extends BaseApiService {
         }));
     }
 
-    public ticks(liquidityPool: LiquidityPool, resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number): Promise<Tick[]> {
+    public ticks(liquidityPool: LiquidityPool, resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number, baseTokenIdentifier?: string): Promise<Tick[]> {
         let url: string = `${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/ticks?resolution=${resolution}&orderBy=${orderBy}`;
 
         if (fromTime) {
@@ -384,6 +390,9 @@ export class LiquidityPoolService extends BaseApiService {
         }
         if (toTime) {
             url += `&toTime=${toTime}`;
+        }
+        if (baseTokenIdentifier) {
+            url += `&baseTokenIdentifier=${baseTokenIdentifier}`;
         }
 
         return axios.get(url).then((response: any) => {
