@@ -553,7 +553,7 @@ declare class AssetService extends BaseApiService {
     price(asset: {
         policyId: string;
         nameHex: string;
-    }): Promise<number>;
+    }, baseTokenIdentifier?: string): Promise<number>;
     lpTokenPool(lpToken: {
         policyId: string;
         nameHex: string;
@@ -593,8 +593,8 @@ declare class LiquidityPoolService extends BaseApiService {
     withdrawOrders(liquidityPool: LiquidityPool, senderFilter?: string, pagination?: PaginationParams): Promise<PaginatedResponse<WithdrawOrder>>;
     withdrawsHistoric(fromTimestamp: number, toTimestamp: number, forAssets?: Asset[]): Promise<WithdrawOrder[]>;
     statesHistoric(fromTimestamp: number, toTimestamp: number, forAssets?: Asset[]): Promise<LiquidityPoolState[]>;
-    prices(poolIdentifiers: string[]): Promise<PriceInfo[]>;
-    ticks(liquidityPool: LiquidityPool, resolution: TickInterval, orderBy?: 'ASC' | 'DESC', fromTime?: number, toTime?: number): Promise<Tick[]>;
+    prices(poolIdentifiers: string[], baseTokenIdentifier?: string): Promise<PriceInfo[]>;
+    ticks(liquidityPool: LiquidityPool, resolution: TickInterval, orderBy?: 'ASC' | 'DESC', fromTime?: number, toTime?: number, baseTokenIdentifier?: string): Promise<Tick[]>;
 }
 
 declare class SyncService extends BaseApiService {

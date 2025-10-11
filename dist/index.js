@@ -511,8 +511,12 @@ var AssetService = class extends BaseApiService {
       );
     });
   }
-  price(asset) {
-    return import_axios.default.get(`${this._baseHost}/api/assets/${asset.policyId}.${asset.nameHex}/price`).then((response) => {
+  price(asset, baseTokenIdentifier) {
+    let url = `${this._baseHost}/api/assets/${asset.policyId}.${asset.nameHex}/price`;
+    if (baseTokenIdentifier) {
+      url += `?baseTokenIdentifier=${baseTokenIdentifier}`;
+    }
+    return import_axios.default.get(url).then((response) => {
       if ("success" in response.data && !response.data.success) {
         return 0;
       }
@@ -1030,8 +1034,12 @@ var LiquidityPoolService = class extends BaseApiService {
       });
     });
   }
-  prices(poolIdentifiers) {
-    return import_axios5.default.post(`${this._baseHost}/api/liquidity-pools/prices`, {
+  prices(poolIdentifiers, baseTokenIdentifier) {
+    let url = `${this._baseHost}/api/liquidity-pools/prices`;
+    if (baseTokenIdentifier) {
+      url += `?baseTokenIdentifier=${baseTokenIdentifier}`;
+    }
+    return import_axios5.default.post(url, {
       identifiers: poolIdentifiers
     }).then((response) => response.data.map((entry) => {
       return {
@@ -1044,13 +1052,16 @@ var LiquidityPoolService = class extends BaseApiService {
       };
     }));
   }
-  ticks(liquidityPool, resolution, orderBy = "ASC", fromTime, toTime) {
+  ticks(liquidityPool, resolution, orderBy = "ASC", fromTime, toTime, baseTokenIdentifier) {
     let url = `${this._baseHost}/api/liquidity-pools/${liquidityPool.identifier}/ticks?resolution=${resolution}&orderBy=${orderBy}`;
     if (fromTime) {
       url += `&fromTime=${fromTime}`;
     }
     if (toTime) {
       url += `&toTime=${toTime}`;
+    }
+    if (baseTokenIdentifier) {
+      url += `&baseTokenIdentifier=${baseTokenIdentifier}`;
     }
     return import_axios5.default.get(url).then((response) => {
       return response.data.map((tickInfo) => {

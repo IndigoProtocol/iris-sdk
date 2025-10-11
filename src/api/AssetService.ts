@@ -134,7 +134,7 @@ export class AssetService extends BaseApiService {
         });
     }
 
-    public ticks(forAssets: Asset[], resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number, baseTokenIdentifier?: string): Promise<Tick[]> {
+    public ticks(forAssets: Asset[], resolution: TickInterval, orderBy: 'ASC' | 'DESC' = 'ASC', fromTime?: number, toTime?: number): Promise<Tick[]> {
         let url: string = `${this._baseHost}/api/assets/ticks?resolution=${resolution}&orderBy=${orderBy}`;
 
         if (fromTime) {
@@ -142,9 +142,6 @@ export class AssetService extends BaseApiService {
         }
         if (toTime) {
             url += `&toTime=${toTime}`;
-        }
-        if (baseTokenIdentifier) {
-            url += `&baseTokenIdentifier=${baseTokenIdentifier}`;
         }
 
         return axios.post(url, {
